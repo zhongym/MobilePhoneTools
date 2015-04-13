@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -63,6 +64,8 @@ public class StartupActivity extends Activity {
 	/** 更新信息的版本 */
 	private String version;
 
+	private SharedPreferences sp;
+
 	private Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
@@ -90,14 +93,42 @@ public class StartupActivity extends Activity {
 		setContentView(R.layout.activity_startup);
 
 		tv_main_downloadprocess = (TextView) findViewById(R.id.tv_main_downloadprocess);
-
 		tv_main_version = (TextView) findViewById(R.id.tv_main_versionName);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
+
 		tv_main_version.setText("版本" + getVersionName());
+
 		// 给启动页面添加个渐变动画
 		AlphaAnimation animation = new AlphaAnimation(0.1f, 1.0f);
 		animation.setDuration(700);// 设置持续时间
 		findViewById(R.id.layout_startup).startAnimation(animation);
-		checkVersionUpdate();
+
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
+		boolean wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
+		boolean sim = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+
+		boolean update = sp.getBoolean("update", false);// 得到用户设置是否自动更新的配置
+		if (update) {// 如果设置为自动更新，
+			Log.i(TAG, "用户设置自动更新，检查更新");
+			if (wifi || sim) {// 有开启wifi或者互联网
+				Log.i(TAG, "有可用网络，检查更新");
+
+				checkVersionUpdate();
+
+			} else {// 没有开启wifi或者互联网
+				// 不检查更新，直接进入软件
+				Log.i(TAG, "没有可用网络，不检查更新，直接进入软件");
+				enterHome();
+			}
+		} else {// 不自动更新，直接进入
+			Log.i(TAG, "用户设置不自动更新，不检查更新，直接进入软件");
+			
+			handler.postDelayed(new Runnable() {//在启动页面等2s再进入主页面
+				public void run() {
+					enterHome();
+				}
+			}, 2000);
+		}
 
 	}
 
@@ -109,11 +140,11 @@ public class StartupActivity extends Activity {
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setTitle("下载更新!");
 		builder.setMessage(description);
-		/**点击返回键，或者其它空白地方：取消*/
+		/** 点击返回键，或者其它空白地方：取消 */
 		builder.setOnCancelListener(new OnCancelListener() {
 			public void onCancel(DialogInterface dialog) {
-				enterHome();//进入软件
-				dialog.dismiss();//关闭对话框
+				enterHome();// 进入软件
+				dialog.dismiss();// 关闭对话框
 			}
 		});
 		builder.setPositiveButton("立刻更新", new OnClickListener() {
@@ -192,78 +223,54 @@ public class StartupActivity extends Activity {
 		new Thread() {
 			public void run() {
 				Message message = Message.obtain();
-//				long startTime = System.currentTimeMillis();
+				 long startTime = System.currentTimeMillis();
+				try {
 
-				ConnectivityManager cm = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
-				boolean wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
-				boolean sim = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnectedOrConnecting();
+					URL url = new URL(getString(R.string.updateurl));
 
-				if (wifi || sim) {// 有开启wifi或者互联网
+					HttpURLConnection conne = (HttpURLConnection) url.openConnection();
+					conne.setRequestMethod("GET");
+					conne.setConnectTimeout(2000);
+					int code = conne.getResponseCode();
+					if (code == 200) {
+						InputStream in = conne.getInputStream();
+						// 得到服务器返回的json数据
+						String result = StreamUtiles.formateStream2String(in);
+						Log.i(TAG, "联网成功" + result);
 
-					try {
+						// 解折json数据
+						JSONObject obj = new JSONObject(result);
+						version = (String) obj.get("version");
+						description = obj.getString("description");
+						apkurl = obj.getString("apkurl");
 
-						URL url = new URL(getString(R.string.updateurl));
-
-						HttpURLConnection conne = (HttpURLConnection) url.openConnection();
-						conne.setRequestMethod("GET");
-						conne.setConnectTimeout(2000);
-						int code = conne.getResponseCode();
-						if (code == 200) {
-							InputStream in = conne.getInputStream();
-							// 得到服务器返回的json数据
-							String result = StreamUtiles.formateStream2String(in);
-							Log.i(TAG, "联网成功" + result);
-
-							// 解折json数据
-							JSONObject obj = new JSONObject(result);
-							version = (String) obj.get("version");
-							description = obj.getString("description");
-							apkurl = obj.getString("apkurl");
-
-							if (getVersionName().endsWith(version)) {// 版本一样，不用更新
-								Log.i(TAG, "不需要更新");
-								message.what = ENTER_HOME;
-
-							} else {// 需要更新
-								Log.i(TAG, "需要更新");
-								message.what = UPDATE_DIALOG;
-							}
-
-						} else {
-							Log.i(TAG, "系统繁忙");
+						if (getVersionName().endsWith(version)) {// 版本一样，不用更新
+							Log.i(TAG, "不需要更新");
 							message.what = ENTER_HOME;
+
+						} else {// 需要更新
+							Log.i(TAG, "需要更新");
+							message.what = UPDATE_DIALOG;
 						}
 
-					} catch (IOException e) {
-						Log.i(TAG, "联网失败");
-						e.printStackTrace();
-						message.what = NETWORK_ERROR;
-
-					} catch (JSONException e) {
-						Log.i(TAG, "JSON失败");
-						e.printStackTrace();
-						message.what = JSON_ERROR;
-
-					} finally {
-
-						/*long endTime = System.currentTimeMillis();
-						long dtime = endTime - startTime;
-						if (dtime < 1000) {
-							try {
-								Thread.sleep(1000 - dtime);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-						}*/
-
-						handler.sendMessage(message);
+					} else {
+						Log.i(TAG, "系统繁忙");
+						message.what = ENTER_HOME;
 					}
 
-				} else {//没有开启wifi或者互联网
-					// 不检查更新，直接进入软件
-					Log.i(TAG, "没有可用网络，不检查更新，直接进入软件");
+				} catch (IOException e) {
+					Log.i(TAG, "联网失败");
+					e.printStackTrace();
+					message.what = NETWORK_ERROR;
 
-				/*	long endTime = System.currentTimeMillis();
+				} catch (JSONException e) {
+					Log.i(TAG, "JSON失败");
+					e.printStackTrace();
+					message.what = JSON_ERROR;
+
+				} finally {
+
+					long endTime = System.currentTimeMillis();
 					long dtime = endTime - startTime;
 					if (dtime < 1000) {
 						try {
@@ -271,8 +278,9 @@ public class StartupActivity extends Activity {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-					}*/
-					enterHome();
+					}
+
+					handler.sendMessage(message);
 				}
 
 			};
