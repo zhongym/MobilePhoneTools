@@ -192,7 +192,7 @@ public class StartupActivity extends Activity {
 		new Thread() {
 			public void run() {
 				Message message = Message.obtain();
-				long startTime = System.currentTimeMillis();
+//				long startTime = System.currentTimeMillis();
 
 				ConnectivityManager cm = (ConnectivityManager) getSystemService(Activity.CONNECTIVITY_SERVICE);
 				boolean wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnectedOrConnecting();
@@ -206,7 +206,7 @@ public class StartupActivity extends Activity {
 
 						HttpURLConnection conne = (HttpURLConnection) url.openConnection();
 						conne.setRequestMethod("GET");
-						conne.setConnectTimeout(4000);
+						conne.setConnectTimeout(2000);
 						int code = conne.getResponseCode();
 						if (code == 200) {
 							InputStream in = conne.getInputStream();
@@ -246,7 +246,7 @@ public class StartupActivity extends Activity {
 
 					} finally {
 
-						long endTime = System.currentTimeMillis();
+						/*long endTime = System.currentTimeMillis();
 						long dtime = endTime - startTime;
 						if (dtime < 1000) {
 							try {
@@ -254,7 +254,7 @@ public class StartupActivity extends Activity {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
-						}
+						}*/
 
 						handler.sendMessage(message);
 					}
@@ -263,7 +263,7 @@ public class StartupActivity extends Activity {
 					// 不检查更新，直接进入软件
 					Log.i(TAG, "没有可用网络，不检查更新，直接进入软件");
 
-					long endTime = System.currentTimeMillis();
+				/*	long endTime = System.currentTimeMillis();
 					long dtime = endTime - startTime;
 					if (dtime < 1000) {
 						try {
@@ -271,7 +271,7 @@ public class StartupActivity extends Activity {
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-					}
+					}*/
 					enterHome();
 				}
 

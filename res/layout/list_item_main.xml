@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="33dp"
-        android:layout_marginTop="33dip"
+        android:layout_marginTop="33dp"
         android:src="@drawable/main_item_clean" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/iv_list_item_main"
-        android:layout_marginLeft="19dp"
+        android:layout_marginLeft="15dp"
         android:layout_toRightOf="@+id/iv_list_item_main"
         android:text="缓存清理" />
 

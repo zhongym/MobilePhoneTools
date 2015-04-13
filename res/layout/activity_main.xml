@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
 
     <LinearLayout
+        android:id="@+id/layout_top_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
         android:orientation="vertical" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
             android:background="#00ff00" >
 
+            <com.zhong.mobilephonetools.ui.FocusTextView
+                android:id="@+id/ftv_showinfo_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="更新内容：1:修复了上一版本的小bug;2:添加用户要求添加的小功能;3:新增支付宝在线支付功能"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/iv3"
@@ -27,7 +35,6 @@
         </RelativeLayout>
 
         <GridView
-            android:layout_weight="4"
             android:id="@+id/gv_main_item"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -38,15 +45,16 @@
             android:verticalSpacing="1dip" >
         </GridView>
         
-        
     </LinearLayout>
+    
+    
 
     <LinearLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_weight="3"
-        android:background="#ff0000" >
+        android:background="#ff0000"
+        android:gravity="center_vertical" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -126,4 +134,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
