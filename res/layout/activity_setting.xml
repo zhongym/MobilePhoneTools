@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhong="http://schemas.android.com/apk/res/com.zhong.mobilephonetools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#6bce22"
+            android:gravity="center"
+            android:text="设置中心"
+            android:textColor="#ffffff"
+            android:textSize="20sp" >
+        </TextView>
+
+        <com.zhong.mobilephonetools.ui.SettingItemView
+            android:id="@+id/siv_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            zhong:desc_off="设置自动更新已经关闭"
+            zhong:desc_on="设置自动更新已经开启"
+            zhong:title="设置是否自动更新" >
+        </com.zhong.mobilephonetools.ui.SettingItemView>
+    </LinearLayout>
+
+    <include layout="@layout/bottom_item" />
+
+</RelativeLayout>

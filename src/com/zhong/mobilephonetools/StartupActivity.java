@@ -37,6 +37,11 @@ import android.widget.Toast;
 
 import com.zhong.mobilephonetools.utils.StreamUtiles;
 
+/**
+ * ∆Ù∂ØΩÁ√Ê
+ * @author zhong
+ *
+ */
 public class StartupActivity extends Activity {
 
 	protected static final String TAG = "MainActivity";

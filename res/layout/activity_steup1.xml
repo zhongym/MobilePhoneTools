@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhong="http://schemas.android.com/apk/res/com.zhong.mobilephonetools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#6bce22"
+            android:gravity="center"
+            android:text="欢迎使用手机防盗"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <TextView
+            style="@style/text_content_style"
+            android:layout_marginLeft="3dp"
+            android:drawableLeft="@drawable/ic_jog_dial_unlock"
+            android:gravity="center_vertical"
+            android:text="你的手机防盗卫士：" />
+
+        <TextView
+            style="@style/text_content_style"
+            android:drawableLeft="@drawable/ic_menu_chat_dashboard"
+            android:text="sim卡变更报警" />
+
+        <TextView
+            style="@style/text_content_style"
+            android:drawableLeft="@drawable/ic_menu_mylocation"
+            android:text="GPS远程追踪" />
+
+        <TextView
+            style="@style/text_content_style"
+            android:drawableLeft="@drawable/ic_menu_delete"
+            android:text="远程数据销毁" />
+
+        <TextView
+            style="@style/text_content_style"
+            android:drawableLeft="@drawable/ic_menu_attachment"
+            android:text="远程锁屏" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_light" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_dark" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_dark" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_dark" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_dark" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/setup1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="下一步" />
+    </RelativeLayout>
+
+</LinearLayout>

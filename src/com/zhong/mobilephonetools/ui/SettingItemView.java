@@ -14,6 +14,8 @@ public class SettingItemView extends RelativeLayout {
 	private TextView tv_content;
 	private TextView tv_description;
 	private CheckBox cb_status;
+	private String desc_on;
+	private String desc_off;
 
 	private void iniView(Context context) {
 		View.inflate(context, R.layout.setting_item, this);
@@ -31,7 +33,11 @@ public class SettingItemView extends RelativeLayout {
 	public SettingItemView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		iniView(context);
-
+		String namespace = "http://schemas.android.com/apk/res/com.zhong.mobilephonetools";
+		String title = attrs.getAttributeValue(namespace, "title");
+		desc_on = attrs.getAttributeValue(namespace, "desc_on");
+		desc_off = attrs.getAttributeValue(namespace, "desc_off");
+		tv_content.setText(title);
 	}
 
 	public SettingItemView(Context context) {
@@ -51,6 +57,11 @@ public class SettingItemView extends RelativeLayout {
 	 * 设置组合控件的状态,单选框的状态就是这个自定义组件的状态
 	 */
 	public void setCheck(boolean b) {
+		if (b) {
+			setDescription(desc_on);
+		} else {
+			setDescription(desc_off);
+		}
 		cb_status.setChecked(b);
 	}
 
