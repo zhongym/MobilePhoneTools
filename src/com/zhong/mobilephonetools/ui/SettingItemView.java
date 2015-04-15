@@ -38,6 +38,7 @@ public class SettingItemView extends RelativeLayout {
 		desc_on = attrs.getAttributeValue(namespace, "desc_on");
 		desc_off = attrs.getAttributeValue(namespace, "desc_off");
 		tv_content.setText(title);
+		tv_description.setText(desc_off);
 	}
 
 	public SettingItemView(Context context) {

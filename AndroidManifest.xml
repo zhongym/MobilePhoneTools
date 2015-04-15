@@ -30,8 +30,11 @@
         <activity android:name="com.zhong.mobilephonetools.MainActivity" android:launchMode="singleTask"/>
         <activity android:name="com.zhong.mobilephonetools.BottomItemActivity"/>
         <activity android:name="com.zhong.mobilephonetools.SettingActivity" android:launchMode="singleTask"/>
-        <activity android:name="com.zhong.mobilephonetools.LostFindActivity"/>
+        <activity android:name="com.zhong.mobilephonetools.LostFindActivity" android:launchMode="singleTask"/>
         <activity android:name="com.zhong.mobilephonetools.Steup1Activity"/>
+        <activity android:name="com.zhong.mobilephonetools.Steup2Activity"/>
+        <activity android:name="com.zhong.mobilephonetools.Steup3Activity"/>
+        <activity android:name="com.zhong.mobilephonetools.Steup4Activity"/>
         
     </application>
 

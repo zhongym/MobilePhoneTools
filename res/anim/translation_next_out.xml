@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="400"
+    android:fromXDelta="0"
+    android:fromYDelta="0"
+    android:toXDelta="-100%p"
+    android:toYDelta="0" >
+
+    <!--
+    屏幕是在坐标系的第四象限
+translate平衡动画
+fromXDelta 从x坐标的什么位置
+fromYDelta 到x坐标的什么位置
+ "100%p" 父窗体的100%
+    -->
+
+</translate>
