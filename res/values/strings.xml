@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">手机管家</string>
+    <string name="sample_device_admin_description">device_admin_description</string>
+    <string name="sample_device_admin">device_admin</string>
 
 </resources>

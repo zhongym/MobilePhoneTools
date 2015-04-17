@@ -1,10 +1,8 @@
 package com.zhong.mobilephonetools;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 /**
  * 手机防盗的设置向导的第一个activity

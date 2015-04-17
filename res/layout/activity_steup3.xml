@@ -31,11 +31,13 @@
             android:text="sim卡变更会发送报警短信报警短信会发给安全号码" />
 
         <EditText
-            android:id="@+id/et_phoneNumber_steup3"
+            android:id="@+id/et_safeNumber_steup3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:hint="请输入安全号码" />
 
         <Button
+            android:onClick="selectContacts"
             android:id="@+id/bt_seletPhoneNumber_steup3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" 
@@ -72,7 +74,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/btn_radio_on_holo_light" />
+                android:src="@drawable/btn_radio_on_holo_light" /><ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_dark" />
 
             <ImageView
                 android:layout_width="wrap_content"

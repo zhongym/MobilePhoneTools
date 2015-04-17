@@ -31,7 +31,7 @@
             android:text="sim卡变更会发送报警短信" />
 
         <com.zhong.mobilephonetools.ui.SettingItemView
-            android:id="@+id/siv_update"
+            android:id="@+id/siv_sim"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             zhong:desc_off="SIM卡未绑定"
@@ -66,6 +66,9 @@
                 android:src="@drawable/btn_radio_on_holo_light" />
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/btn_radio_on_holo_dark" /><ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/btn_radio_on_holo_dark" />
