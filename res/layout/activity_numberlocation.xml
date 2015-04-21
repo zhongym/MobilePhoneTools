@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhong="http://schemas.android.com/apk/res/com.zhong.mobilephonetools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tv_title_numberloaction"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#6bce22"
+        android:gravity="center"
+        android:text="号码归属地查询"
+        android:textColor="#ffffff"
+        android:textSize="20sp" >
+    </TextView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <EditText
+        android:id="@+id/et_number_numberlocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title_numberloaction"
+        android:hint="请输入要查询的号码" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <Button
+        android:id="@+id/bt_query_numberlocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_number_numberlocation"
+        android:background="@drawable/bottom_cyan_selector"
+        android:onClick="query"
+        android:text="查询"
+        android:textColor="#ffffff" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/tv_result_numberloaction"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#9900FFC3"
+        android:gravity="center_vertical"
+        android:text="结果显示:"
+        android:textColor="#ff0000"
+        android:textSize="20sp" >
+    </TextView>
+
+</LinearLayout>

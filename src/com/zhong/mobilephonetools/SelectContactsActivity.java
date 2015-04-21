@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-public class selectContactsActivity extends Activity {
+public class SelectContactsActivity extends Activity {
 
 	private static final String TAG = "selectContactsActivity";
 	private ListView lv_contacts;
@@ -36,18 +37,21 @@ public class selectContactsActivity extends Activity {
 		lv_contacts.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				String phone = data.get(position).get("phone");
+				String name = data.get(position).get("name");
 				Intent intent = new Intent();
 				intent.putExtra("phone", phone);
+				intent.putExtra("name", name);
 				setResult(0, intent);
 				finish();// 选择号码后关闭当前窗口
 			}
 		});
 
 	}
-	
+
 	/**
 	 * <h1>读取系统联系人<h1><br>
 	 * 每个map存放联系人的名称和号码name="zs",phone="123"
+	 * 
 	 * @return List <Map<String, String>> 联系人集合
 	 * 
 	 */
@@ -71,13 +75,14 @@ public class selectContactsActivity extends Activity {
 				while (dataCursor.moveToNext()) {
 					String data = dataCursor.getString(0);
 					String mimetype = dataCursor.getString(1);
-
-					if ("vnd.android.cursor.item/name".equals(mimetype)) {
-						// 联系人的姓名
-						map.put("name", data);
-					} else if ("vnd.android.cursor.item/phone_v2".equals(mimetype)) {
-						// 联系人的电话号码
-						map.put("phone", data);
+					if (!TextUtils.isEmpty(data)) {
+						if ("vnd.android.cursor.item/name".equals(mimetype)) {
+							// 联系人的姓名
+							map.put("name", data);
+						} else if ("vnd.android.cursor.item/phone_v2".equals(mimetype)) {
+							// 联系人的电话号码
+							map.put("phone", data);
+						}
 					}
 				}
 				list.add(map);

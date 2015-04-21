@@ -59,7 +59,9 @@ public class BottomItemActivity extends Activity {
 	 */
 	public void tool(View view) {
 
-		Toast.makeText(this, "tool", 0).show();
+	//	Toast.makeText(this, "tool", 0).show();
+		Intent intent=new Intent(this, AdvancedtoolsActivity.class);
+		startActivity(intent);
 	}
 
 	/**

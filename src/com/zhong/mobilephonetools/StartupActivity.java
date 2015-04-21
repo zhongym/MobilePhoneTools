@@ -1,8 +1,10 @@
 package com.zhong.mobilephonetools;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -39,6 +41,7 @@ import com.zhong.mobilephonetools.utils.StreamUtiles;
 
 /**
  * 启动界面
+ * 
  * @author zhong
  *
  */
@@ -127,14 +130,60 @@ public class StartupActivity extends Activity {
 			}
 		} else {// 不自动更新，直接进入
 			Log.i(TAG, "用户设置不自动更新，不检查更新，直接进入软件");
-			
-			handler.postDelayed(new Runnable() {//在启动页面等2s再进入主页面
-				public void run() {
-					enterHome();
-				}
-			}, 2000);
+
+			handler.postDelayed(new Runnable() {// 在启动页面等2s再进入主页面
+						public void run() {
+							enterHome();
+						}
+					}, 2000);
 		}
 
+		copyDB();// 将assets目录下的数据库address.db复制到data/data/包名/files/address.db
+
+	}
+
+	/**
+	 * 将assets目录下的数据库address.db复制到data/data/包名/files/address.db
+	 */
+	private void copyDB() {
+
+		File file = new File(getFilesDir(), "address.db");
+
+		if (file.exists() && file.length() > 0) {
+			Log.i(TAG, "address.db已经存在，需要复制");
+		} else {
+			InputStream is = null;
+			OutputStream os = null;
+			try {
+				is = getAssets().open("address.db");
+				os = new FileOutputStream(file);
+				byte[] bu = new byte[1024];
+				int len = 0;
+				while ((len = is.read(bu)) != -1) {
+					os.write(bu, 0, len);
+				}
+
+				Log.i(TAG, "复制数据库完成");
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (is != null) {
+						is.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				try {
+					if (os != null) {
+						os.close();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
 	}
 
 	/**
@@ -228,7 +277,7 @@ public class StartupActivity extends Activity {
 		new Thread() {
 			public void run() {
 				Message message = Message.obtain();
-				 long startTime = System.currentTimeMillis();
+				long startTime = System.currentTimeMillis();
 				try {
 
 					URL url = new URL(getString(R.string.updateurl));

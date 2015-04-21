@@ -27,6 +27,31 @@
             zhong:desc_on="设置自动更新已经开启"
             zhong:title="设置是否自动更新" >
         </com.zhong.mobilephonetools.ui.SettingItemView>
+
+        <com.zhong.mobilephonetools.ui.SettingItemView
+            android:id="@+id/siv_numberlocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            zhong:desc_off="码归属地功能已经关闭"
+            zhong:desc_on="码归属地功能已经开启"
+            zhong:title="设置是否开启号码归属地功能" >
+        </com.zhong.mobilephonetools.ui.SettingItemView>
+
+        <com.zhong.mobilephonetools.ui.SettingClickView
+            android:id="@+id/scv_numberloactionstype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </com.zhong.mobilephonetools.ui.SettingClickView>
+        
+        <com.zhong.mobilephonetools.ui.SettingItemView
+            android:id="@+id/siv_callsmssafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            zhong:desc_off="黑名单拦截已经关闭"
+            zhong:desc_on="黑名单拦截已经开启"
+            zhong:title="设置是否开启黑名单拦截功能" >
+        </com.zhong.mobilephonetools.ui.SettingItemView>
+        
     </LinearLayout>
 
     <include layout="@layout/bottom_item" />

@@ -34,7 +34,7 @@ public class Steup3Activity extends BaseSetupActivity {
 	 * @param view
 	 */
 	public void selectContacts(View view) {
-		Intent intent = new Intent(this, selectContactsActivity.class);
+		Intent intent = new Intent(this, SelectContactsActivity.class);
 		startActivityForResult(intent, 0);
 
 	}
@@ -44,11 +44,13 @@ public class Steup3Activity extends BaseSetupActivity {
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		String phone = data.getStringExtra("phone");
-		if (TextUtils.isEmpty(phone)) {
-			return;
+		if (data != null) {
+			String phone = data.getStringExtra("phone");
+			if (TextUtils.isEmpty(phone)) {
+				return;
+			}
+			et_safeNumber.setText(phone);
 		}
-		et_safeNumber.setText(phone);
 	}
 
 	public void doNext() {

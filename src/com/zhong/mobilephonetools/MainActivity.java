@@ -76,7 +76,8 @@ public class MainActivity extends BottomItemActivity {
 					showLostFindDialog();
 					break;
 				case 2:
-					Toast.makeText(MainActivity.this, "Õ®—∂Œ¿ ø", 0).show();
+					Intent intent=new Intent(MainActivity.this,CallSmsSafeActivity.class);
+					startActivity(intent);
 					break;
 				case 3:
 
