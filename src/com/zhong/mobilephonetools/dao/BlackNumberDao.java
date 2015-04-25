@@ -56,6 +56,31 @@ public class BlackNumberDao {
 	}
 
 	/**
+	 * 分页查询数据
+	 * @param limit 每页显示的条目数量
+	 * @param offset 每页从哪里开始
+	 * @return 查询结果集合
+	 */
+	public List<BlackNumberInfo> findAllForPage(int limit,int offset) {
+		List<BlackNumberInfo> result = new ArrayList<BlackNumberInfo>();
+		SQLiteDatabase db = helper.getReadableDatabase();
+		Cursor cursor = db.rawQuery("select name,number,mode from blackNumber order by _id desc limit ? offset ?", new String[]{String.valueOf(limit),String.valueOf(offset)});
+		while (cursor.moveToNext()) {
+			BlackNumberInfo info = new BlackNumberInfo();
+			String name = cursor.getString(0);
+			String number = cursor.getString(1);
+			String mode = cursor.getString(2);
+			info.setName(name);
+			info.setMode(mode);
+			info.setNumber(number);
+			result.add(info);
+		}
+		cursor.close();
+		db.close();
+		return result;
+	}
+	
+	/**
 	 * 查询全部黑名单号码
 	 * 
 	 * @return

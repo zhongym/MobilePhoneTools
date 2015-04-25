@@ -13,8 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -30,14 +32,11 @@ import com.zhong.mobilephonetools.domain.BlackNumberInfo;
 /**
  * 通讯卫士主页：<br>
  * 
- * <li>1：列出所有黑名单<br> 
- * <li>2：添加黑名单<br>
+ * <li>1：列出所有黑名单<br> <li>2：添加黑名单<br>
  * <ol>
- * 		2.1手动输入 <br>
- * 		2.2从联系人中添加
- * </ol> 
- * <li>3：移除黑名单<br> 
- * <li>4：修改黑名单<br>
+ * 2.1手动输入 <br>
+ * 2.2从联系人中添加
+ * </ol> <li>3：移除黑名单<br> <li>4：修改黑名单<br>
  *
  */
 public class CallSmsSafeActivity extends Activity {
@@ -52,23 +51,94 @@ public class CallSmsSafeActivity extends Activity {
 
 	private BlackNumberAdapter adapter;
 
+	/** 每次查询多少条 **/
+	private int limit = 20;
+	/** 从哪条开始查询 **/
+	private int offset = 0;
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.i(TAG, "CallSmsSafeActivity被创建了");
 		setContentView(R.layout.activity_call_sms_safe);
 
 		dao = new BlackNumberDao(this);
-		infos = dao.findAll();
+		infos = dao.findAllForPage(limit, offset);
 
 		lv_blackNumber = (ListView) findViewById(R.id.lv_black_number);
 
 		adapter = new BlackNumberAdapter();
 		lv_blackNumber.setAdapter(adapter);
 
+		// 给listView每一条item添加点击事件
 		lv_blackNumber.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				BlackNumberInfo info = infos.get(position);
 				showUpdateBlackNumberDialog(info.getName(), info.getNumber(), info.getMode());// 黑名单修改框
+			}
+		});
+
+		// 给listView添加滑动事件，当滑动到最后一条的时候，加载新的数据
+		lv_blackNumber.setOnScrollListener(new OnScrollListener() {
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+				switch (scrollState) {
+				case OnScrollListener.SCROLL_STATE_IDLE:// 空闲状态
+
+					// 判断当前listview滚动的位置
+					// 获取最后一个可见条目在集合里面的位置
+					int lastpostion = lv_blackNumber.getLastVisiblePosition();
+
+					// 一：分批加载，每次加载到的都添加到集合里面，用户可以看到之前加载的数据
+					// // 集合里面有20个item 位置从0开始的 最后一个条目的位置 19
+					// if(lastpostion==(infos.size()-1)){
+					// offset+=limit;
+					// infos.addAll(dao.findAllForPage(limit, offset));
+					// adapter.notifyDataSetChanged();//通知数据处理器数据更新了
+					// Log.i(TAG, "再向下加载20条数据");
+					// }
+
+					// 二：分页加载，每次加载出新的，旧的不再保留
+					// 向下一页
+					// 集合里面有20个item 位置从0开始的 最后一个条目的位置 19
+					if (lastpostion == (infos.size() - 1)) {
+
+						offset += limit;
+						List<BlackNumberInfo> is = dao.findAllForPage(limit, offset);
+						if (is.size() < limit) {
+							infos.addAll(is);
+						} else {
+							infos = is;
+						}
+						adapter.notifyDataSetChanged();// 通知数据处理器数据更新了
+						// 在adapter.notifyDataSetChanged();之后调用ListView.setSelection(0);就可以回到想要的位置
+						lv_blackNumber.setSelection(1);
+						Log.i(TAG, "再向下加载20条数据");
+					}
+
+					// 向上一页
+					int firstVisiblePosition = lv_blackNumber.getFirstVisiblePosition();
+					if (offset > 0 && firstVisiblePosition == 0) {
+						offset -= limit;
+						infos = dao.findAllForPage(limit, offset);
+						adapter.notifyDataSetChanged();// 通知数据处理器数据更新了
+						lv_blackNumber.setSelection(19);
+						Log.i(TAG, "再向上加载20条数据");
+					}
+
+					break;
+				case OnScrollListener.SCROLL_STATE_FLING:// 惯性滑行状态
+
+					break;
+				case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:// 手指触摸滚动
+
+					break;
+
+				}
+
+			}
+
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
 			}
 		});
 	}
@@ -279,7 +349,7 @@ public class CallSmsSafeActivity extends Activity {
 				// 更新listView的数据
 				BlackNumberInfo info = new BlackNumberInfo(name, number, mode);
 				infos.remove(info);
-				infos.add(0,info);
+				infos.add(0, info);
 				adapter.notifyDataSetChanged();
 				dialog.dismiss();
 			}

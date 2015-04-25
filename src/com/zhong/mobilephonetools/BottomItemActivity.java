@@ -49,7 +49,9 @@ public class BottomItemActivity extends Activity {
 	 * @param view
 	 */
 	public void software(View view) {
-		Toast.makeText(this, "software", 0).show();
+		//Toast.makeText(this, "software", 0).show();
+		Intent intent=new Intent(this, AppManagerActivity.class);
+		startActivity(intent);
 	}
 
 	/**

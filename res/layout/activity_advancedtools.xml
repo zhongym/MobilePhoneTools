@@ -16,11 +16,32 @@
     </TextView>
 
     <TextView
+        android:id="@+id/tv_numberlocation"
         style="@style/tv_tool_item"
         android:layout_below="@id/tv_title_advancedtools"
         android:drawableLeft="@drawable/number_laction"
         android:onClick="numberLactionQuery"
         android:text="号码归属地查询" >
+    </TextView>
+    
+    <TextView
+        android:id="@+id/tv_sms_backup"
+        android:layout_below="@id/tv_numberlocation"
+        style="@style/tv_tool_item"
+        android:drawableLeft="@drawable/sms_backup"
+        android:drawablePadding="5dp"
+        android:onClick="smsBackup"
+        android:text="短信备份" >
+    </TextView>
+    
+    <TextView
+        android:id="@+id/tv_sms_restore"
+        android:layout_below="@id/tv_sms_backup"
+        style="@style/tv_tool_item"
+        android:drawableLeft="@drawable/sms_backup"
+        android:drawablePadding="5dp"
+        android:onClick="smsRestore"
+        android:text="短信还原" >
     </TextView>
 
     <include layout="@layout/bottom_item" />

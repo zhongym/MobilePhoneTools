@@ -8,6 +8,7 @@ import com.zhong.mobilephonetools.dao.utils.NumberBlackNameListOpenHelper;
 import com.zhong.mobilephonetools.domain.BlackNumberInfo;
 
 import android.test.AndroidTestCase;
+import android.text.format.Formatter;
 
 public class BlackNumberDaoTest extends AndroidTestCase {
 	public void testCreateDB() throws Exception {
@@ -20,7 +21,7 @@ public class BlackNumberDaoTest extends AndroidTestCase {
 		long basenumber = 13500000000l;
 		Random random = new Random();
 		for (int i = 0; i < 100; i++) {
-			dao.add("zhong"+i,String.valueOf(basenumber + i), String.valueOf(random.nextInt(3) + 1));
+			dao.add("zhong" + i, String.valueOf(basenumber + i), String.valueOf(random.nextInt(3) + 1));
 		}
 	}
 
@@ -39,7 +40,7 @@ public class BlackNumberDaoTest extends AndroidTestCase {
 
 	public void testUpdate() throws Exception {
 		BlackNumberDao dao = new BlackNumberDao(getContext());
-		dao.update("zhon","110", "2");
+		dao.update("zhon", "110", "2");
 	}
 
 	public void testFind() throws Exception {
