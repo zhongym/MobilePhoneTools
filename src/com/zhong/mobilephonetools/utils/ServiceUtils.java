@@ -12,7 +12,7 @@ public class ServiceUtils {
 	 * 检查服务是否开启
 	 * @param context Context上下文
 	 * @param serviceName 服务的全名
-	 * @return 返回是前服务是否开启
+	 * @return 返回当前服务是否开启
 	 */
 	public static boolean isServiceRunnign(Context context, String serviceName) {
 

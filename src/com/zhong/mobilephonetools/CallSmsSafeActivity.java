@@ -164,7 +164,7 @@ public class CallSmsSafeActivity extends Activity {
 			// 复用页面不显示的view对象，不用再创建新的view对象。
 			// convertView是刚刚在界面上不可见的哪一个，被传回来,刚打开当前activity时，convertview为null。
 			if (convertView == null) {
-				view = View.inflate(CallSmsSafeActivity.this, R.layout.black_number_item, null);
+				view = View.inflate(CallSmsSafeActivity.this, R.layout.list_item_black_number, null);
 
 				holder = new ViewHolder();
 				holder.tv_name = (TextView) view.findViewById(R.id.tv_black_number_name);

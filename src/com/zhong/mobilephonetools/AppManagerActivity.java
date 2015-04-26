@@ -3,8 +3,8 @@ package com.zhong.mobilephonetools;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zhong.mobilephonetools.business.AppInfoProvider;
 import com.zhong.mobilephonetools.domain.AppInfo;
-import com.zhong.mobilephonetools.utils.AppInfoProvider;
 import com.zhong.mobilephonetools.utils.DensityUtil;
 
 import android.app.Activity;
@@ -275,7 +275,7 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 				view = convertView;
 				viewHolder = (ViewHolder) view.getTag();
 			} else {
-				view = View.inflate(AppManagerActivity.this, R.layout.app_item, null);
+				view = View.inflate(AppManagerActivity.this, R.layout.list_item_app, null);
 				viewHolder = new ViewHolder();
 				viewHolder.iv_icon = (ImageView) view.findViewById(R.id.iv_appicon);
 				viewHolder.tv_name = (TextView) view.findViewById(R.id.tv_appname);
@@ -287,7 +287,7 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 			viewHolder.tv_name.setText(info.getName());
 			
 			String version = info.getVersionCode();
-			if (version.length() > 20) {
+			if (version!=null&&version.length() > 21) {
 				version = version.substring(0, 20);
 			}
 			viewHolder.tv_verson.setText("°æ±¾£º" + version);

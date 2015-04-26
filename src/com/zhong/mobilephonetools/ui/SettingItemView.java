@@ -18,7 +18,7 @@ public class SettingItemView extends RelativeLayout {
 	private String desc_off;
 
 	private void iniView(Context context) {
-		View.inflate(context, R.layout.setting_item, this);
+		View.inflate(context, R.layout.setting_item_view, this);
 		tv_content = (TextView) findViewById(R.id.tv_content_setting_item);
 		tv_description = (TextView) findViewById(R.id.tv_description_setting_item);
 		cb_status = (CheckBox) findViewById(R.id.cb_status);

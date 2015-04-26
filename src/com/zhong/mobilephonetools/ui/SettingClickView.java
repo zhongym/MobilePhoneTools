@@ -17,7 +17,7 @@ public class SettingClickView extends RelativeLayout {
 	private String desc_off;
 
 	private void iniView(Context context) {
-		View.inflate(context, R.layout.setting_click_item, this);
+		View.inflate(context, R.layout.setting_click_view, this);
 		tv_content = (TextView) findViewById(R.id.tv_content_setting_click_item);
 		tv_description = (TextView) findViewById(R.id.tv_description_setting_click_item);
 

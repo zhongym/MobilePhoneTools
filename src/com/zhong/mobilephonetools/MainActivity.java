@@ -76,12 +76,14 @@ public class MainActivity extends BottomItemActivity {
 					showLostFindDialog();
 					break;
 				case 2:
-					Intent intent=new Intent(MainActivity.this,CallSmsSafeActivity.class);
-					startActivity(intent);
+//					Toast.makeText(MainActivity.this, "通讯卫士", 0).show();
+					Intent callSmsSafeActivity=new Intent(MainActivity.this,CallSmsSafeActivity.class);
+					startActivity(callSmsSafeActivity);
 					break;
 				case 3:
-
-					Toast.makeText(MainActivity.this, "进程管理", 0).show();
+//					Toast.makeText(MainActivity.this, "进程管理", 0).show();
+					Intent taskManagerActivity=new Intent(MainActivity.this,TaskManagerActivity.class);
+					startActivity(taskManagerActivity);
 					break;
 				case 4:
 
@@ -248,7 +250,7 @@ public class MainActivity extends BottomItemActivity {
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
-			View view = View.inflate(MainActivity.this, R.layout.main_list_item, null);
+			View view = View.inflate(MainActivity.this, R.layout.list_item_main, null);
 			ImageView iv = (ImageView) view.findViewById(R.id.iv_list_item_main);
 			TextView tv = (TextView) view.findViewById(R.id.tv_name_list_item_main);
 			iv.setImageResource(ics[position]);

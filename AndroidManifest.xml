@@ -32,6 +32,7 @@
     <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" />
     <!-- 查询快捷方式 -->
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -75,10 +76,14 @@
         <activity android:name="com.zhong.mobilephonetools.NumberLocationActivity" />
         <activity android:name="com.zhong.mobilephonetools.CallSmsSafeActivity" />
         <activity android:name="com.zhong.mobilephonetools.AppManagerActivity" />
+        <activity android:name="com.zhong.mobilephonetools.TaskManagerActivity" />
+        <activity android:name="com.zhong.mobilephonetools.TaskManagerSettingActivity" />
 
         <service android:name="com.zhong.mobilephonetools.service.GPSService" />
         <service android:name="com.zhong.mobilephonetools.service.NumberLocationService" />
         <service android:name="com.zhong.mobilephonetools.service.SmsCallSafeService" />
+        <service android:name="com.zhong.mobilephonetools.service.AutoClearProcessService" />
+        <service android:name="com.zhong.mobilephonetools.service.WidgetBgService" />
 
         <receiver android:name="com.zhong.mobilephonetools.receiver.BootCompletedReceiver" >
             <intent-filter>
@@ -102,6 +107,20 @@
             <intent-filter>
                 <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
             </intent-filter>
+        </receiver>
+        <receiver android:name="com.zhong.mobilephonetools.receiver.ClearProcessWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+        <receiver android:name="com.zhong.mobilephonetools.receiver.KillAllRecevier" >
+      		<intent-filter>
+      		    <action android:name="com.zhong.action.KillAll"/>
+      		</intent-filter>
         </receiver>
     </application>
 
