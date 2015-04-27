@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhong="http://schemas.android.com/apk/res/com.zhong.mobilephonetools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#6bce22"
+            android:gravity="center"
+            android:text="程序锁设置"
+            android:textColor="#ffffff"
+            android:textSize="20sp" >
+        </TextView>
+
+        <com.zhong.mobilephonetools.ui.SettingItemView
+            android:id="@+id/siv_starup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            zhong:desc_off="程序锁功能已经关闭"
+            zhong:desc_on="设程序锁功能已经开启"
+            zhong:title="设置是否开启程序锁功能" >
+        </com.zhong.mobilephonetools.ui.SettingItemView>
+
+        <TextView
+            android:id="@+id/tv_pwd"
+            style="@style/tv_tool_item"
+            android:layout_below="@id/tv_sms_restore"
+            android:drawableEnd="@drawable/mem_icon"
+            android:drawablePadding="5dp"
+            android:paddingRight="10dp"
+            android:text="密码设置" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_below="@id/tv_app_lock"
+            android:background="#44000000" />
+    </LinearLayout>
+
+</RelativeLayout>

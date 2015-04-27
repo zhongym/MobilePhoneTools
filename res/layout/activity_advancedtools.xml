@@ -18,31 +18,70 @@
     <TextView
         android:id="@+id/tv_numberlocation"
         style="@style/tv_tool_item"
-        android:layout_below="@id/tv_title_advancedtools"
-        android:drawableLeft="@drawable/number_laction"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tv_title_advancedtools"
+        android:drawableEnd="@drawable/mem_icon"
+        android:drawableLeft="@drawable/number_location"
         android:onClick="numberLactionQuery"
-        android:text="号码归属地查询" >
-    </TextView>
-    
+        android:paddingRight="10dp"
+        android:text="号码归属地查询" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_numberlocation"
+        android:background="#44000000" />
+
     <TextView
         android:id="@+id/tv_sms_backup"
-        android:layout_below="@id/tv_numberlocation"
         style="@style/tv_tool_item"
-        android:drawableLeft="@drawable/sms_backup"
+        android:layout_below="@id/tv_numberlocation"
+        android:drawableEnd="@drawable/mem_icon"
+        android:drawableLeft="@drawable/sms_b_r"
         android:drawablePadding="5dp"
         android:onClick="smsBackup"
-        android:text="短信备份" >
-    </TextView>
-    
+        android:paddingRight="10dp"
+        android:text="短信备份" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_sms_backup"
+        android:background="#44000000" />
+
     <TextView
         android:id="@+id/tv_sms_restore"
-        android:layout_below="@id/tv_sms_backup"
         style="@style/tv_tool_item"
-        android:drawableLeft="@drawable/sms_backup"
+        android:layout_below="@id/tv_sms_backup"
+        android:drawableEnd="@drawable/mem_icon"
+        android:drawableLeft="@drawable/sms_b_r"
         android:drawablePadding="5dp"
         android:onClick="smsRestore"
-        android:text="短信还原" >
-    </TextView>
+        android:paddingRight="10dp"
+        android:text="短信还原" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_sms_restore"
+        android:background="#44000000" />
+
+    <TextView
+        android:id="@+id/tv_app_lock"
+        style="@style/tv_tool_item"
+        android:layout_below="@id/tv_sms_restore"
+        android:drawableEnd="@drawable/mem_icon"
+        android:drawableLeft="@drawable/app_lock"
+        android:drawablePadding="5dp"
+        android:onClick="appLock"
+        android:paddingRight="10dp"
+        android:text="程序锁" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tv_app_lock"
+        android:background="#44000000" />
 
     <include layout="@layout/bottom_item" />
 

@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,11 +19,14 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 
 	private static final String TAG = "AdvancedtoolsActivity";
 
+	private SharedPreferences sp;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_advancedtools);
 		Log.i(TAG, "AdvancedtoolsActivity用户可见");
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 	}
 
 	/**
@@ -39,21 +43,18 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 	 * 短信还原
 	 */
 	public void smsRestore(View view) {
-		
-		
+
 	}
 
 	/**
 	 * 短信备份
 	 */
 	public void smsBackup(View view) {
-		
+
 		final ProgressDialog pDialog = new ProgressDialog(AdvancedtoolsActivity.this);
 		pDialog.setMessage("正在备份");
 		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		pDialog.show();
-		
-		
+
 		AlertDialog dialog;
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setTitle("备份短信");
@@ -67,6 +68,8 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 
 		builder.setPositiveButton("备份", new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
+				pDialog.show();
+
 				try {
 					SmsUtils.backupSms(AdvancedtoolsActivity.this, new BackUpCallBack() {
 
@@ -83,7 +86,7 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 				} catch (Exception e) {
 					e.printStackTrace();
 					Toast.makeText(AdvancedtoolsActivity.this, "备份失败", 0).show();
-				}finally{
+				} finally {
 					pDialog.dismiss();
 				}
 			}
@@ -91,4 +94,27 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 
 		dialog = builder.show();
 	}
+
+	/**
+	 * 程序锁
+	 * 
+	 * @param view
+	 */
+	public void appLock(View view) {
+		if (sp.getBoolean("firstSetPwd", true)) {
+			Intent intent = new Intent(this, GuideGesturePasswordActivity.class);
+			// intent.putExtra("flag", "createPassward");
+			startActivity(intent);
+		} else {
+			if (sp.getBoolean("applockpwd", false)) {
+				Intent intent = new Intent(this, UnlockGesturePasswordActivity.class);
+				intent.putExtra("packname", "AppLockActivity");
+				startActivity(intent);
+			} else {
+				Intent intent = new Intent(this, AppLockActivity.class);
+				startActivity(intent);
+			}
+		}
+	}
+
 }
