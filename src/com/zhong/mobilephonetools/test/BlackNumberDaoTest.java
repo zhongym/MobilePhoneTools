@@ -3,12 +3,11 @@ package com.zhong.mobilephonetools.test;
 import java.util.List;
 import java.util.Random;
 
+import android.test.AndroidTestCase;
+
 import com.zhong.mobilephonetools.dao.BlackNumberDao;
 import com.zhong.mobilephonetools.dao.utils.NumberBlackNameListOpenHelper;
 import com.zhong.mobilephonetools.domain.BlackNumberInfo;
-
-import android.test.AndroidTestCase;
-import android.text.format.Formatter;
 
 public class BlackNumberDaoTest extends AndroidTestCase {
 	public void testCreateDB() throws Exception {

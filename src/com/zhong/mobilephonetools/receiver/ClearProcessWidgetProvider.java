@@ -1,12 +1,11 @@
 package com.zhong.mobilephonetools.receiver;
 
-import com.zhong.mobilephonetools.service.WidgetBgService;
-import com.zhong.mobilephonetools.utils.ServiceUtils;
-
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+
+import com.zhong.mobilephonetools.service.WidgetBgService;
 
 public class ClearProcessWidgetProvider extends AppWidgetProvider {
 

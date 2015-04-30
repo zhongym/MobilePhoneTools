@@ -55,7 +55,6 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 		pDialog.setMessage("正在备份");
 		pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 
-		AlertDialog dialog;
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setTitle("备份短信");
 		int count = SmsUtils.smsCount(this);
@@ -92,7 +91,7 @@ public class AdvancedtoolsActivity extends BottomItemActivity {
 			}
 		});
 
-		dialog = builder.show();
+		builder.show();
 	}
 
 	/**

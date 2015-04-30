@@ -34,16 +34,6 @@
         android:textColor="#55000000"
         android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/tv_loacation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="8dp"
-        android:text="25M"
-        android:textColor="#55000000"
-        android:textSize="12sp" />
     
     <TextView
         android:id="@+id/tv_size"

@@ -1,11 +1,5 @@
 package com.zhong.mobilephonetools;
 
-import com.zhong.mobilephonetools.service.NumberLocationService;
-import com.zhong.mobilephonetools.service.SmsCallSafeService;
-import com.zhong.mobilephonetools.ui.SettingClickView;
-import com.zhong.mobilephonetools.ui.SettingItemView;
-import com.zhong.mobilephonetools.utils.ServiceUtils;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -16,7 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
+
+import com.zhong.mobilephonetools.service.NumberLocationService;
+import com.zhong.mobilephonetools.service.SmsCallSafeService;
+import com.zhong.mobilephonetools.ui.SettingClickView;
+import com.zhong.mobilephonetools.ui.SettingItemView;
+import com.zhong.mobilephonetools.utils.ServiceUtils;
 
 /**
  * …Ë÷√ΩÁ√Ê

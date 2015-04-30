@@ -1,87 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:zhong="http://schemas.android.com/apk/res/com.zhong.mobilephonetools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/tv_title_advancedtools"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#6bce22"
-        android:gravity="center"
-        android:text="高级工具"
-        android:textColor="#ffffff"
-        android:textSize="20sp" >
-    </TextView>
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tv_numberlocation"
-        style="@style/tv_tool_item"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/tv_title_advancedtools"
-        android:drawableEnd="@drawable/mem_icon"
-        android:drawableLeft="@drawable/number_location"
-        android:onClick="numberLactionQuery"
-        android:paddingRight="10dp"
-        android:text="号码归属地查询" />
+        <TextView
+            android:id="@+id/tv_title_advancedtools"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#6bce22"
+            android:gravity="center"
+            android:text="高级工具"
+            android:textColor="#ffffff"
+            android:textSize="20sp" >
+        </TextView>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tv_numberlocation"
-        android:background="#44000000" />
+        <TextView
+            android:id="@+id/tv_numberlocation"
+            style="@style/tv_tool_item"
+            android:background="@drawable/tool_tv__selector"
+            android:drawableEnd="@drawable/mem_icon"
+            android:drawableLeft="@drawable/number_location"
+            android:onClick="numberLactionQuery"
+            android:paddingRight="10dp"
+            android:text="号码归属地查询" />
 
-    <TextView
-        android:id="@+id/tv_sms_backup"
-        style="@style/tv_tool_item"
-        android:layout_below="@id/tv_numberlocation"
-        android:drawableEnd="@drawable/mem_icon"
-        android:drawableLeft="@drawable/sms_b_r"
-        android:drawablePadding="5dp"
-        android:onClick="smsBackup"
-        android:paddingRight="10dp"
-        android:text="短信备份" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#44000000" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tv_sms_backup"
-        android:background="#44000000" />
+        <TextView
+            android:id="@+id/tv_sms_backup"
+            style="@style/tv_tool_item"
+            android:background="@drawable/tool_tv__selector"
+            android:drawableEnd="@drawable/mem_icon"
+            android:drawableLeft="@drawable/sms_b_r"
+            android:drawablePadding="5dp"
+            android:onClick="smsBackup"
+            android:paddingRight="10dp"
+            android:text="短信备份" />
 
-    <TextView
-        android:id="@+id/tv_sms_restore"
-        style="@style/tv_tool_item"
-        android:layout_below="@id/tv_sms_backup"
-        android:drawableEnd="@drawable/mem_icon"
-        android:drawableLeft="@drawable/sms_b_r"
-        android:drawablePadding="5dp"
-        android:onClick="smsRestore"
-        android:paddingRight="10dp"
-        android:text="短信还原" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#44000000" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tv_sms_restore"
-        android:background="#44000000" />
+        <TextView
+            android:id="@+id/tv_sms_restore"
+            style="@style/tv_tool_item"
+            android:background="@drawable/tool_tv__selector"
+            android:drawableEnd="@drawable/mem_icon"
+            android:drawableLeft="@drawable/sms_b_r"
+            android:drawablePadding="5dp"
+            android:onClick="smsRestore"
+            android:paddingRight="10dp"
+            android:text="短信还原" />
 
-    <TextView
-        android:id="@+id/tv_app_lock"
-        style="@style/tv_tool_item"
-        android:layout_below="@id/tv_sms_restore"
-        android:drawableEnd="@drawable/mem_icon"
-        android:drawableLeft="@drawable/app_lock"
-        android:drawablePadding="5dp"
-        android:onClick="appLock"
-        android:paddingRight="10dp"
-        android:text="程序锁" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#44000000" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tv_app_lock"
-        android:background="#44000000" />
+        <TextView
+            android:id="@+id/tv_app_lock"
+            style="@style/tv_tool_item"
+            android:background="@drawable/tool_tv__selector"
+            android:drawableEnd="@drawable/mem_icon"
+            android:drawableLeft="@drawable/app_lock"
+            android:drawablePadding="5dp"
+            android:onClick="appLock"
+            android:paddingRight="10dp"
+            android:text="程序锁" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#44000000" />
+    </LinearLayout>
 
     <include layout="@layout/bottom_item" />
 

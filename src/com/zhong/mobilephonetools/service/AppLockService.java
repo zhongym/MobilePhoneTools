@@ -7,7 +7,6 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.app.Service;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -79,10 +78,9 @@ public class AppLockService extends Service {
 		new Thread() {
 			public void run() {
 				while (flag) {
-					List<RunningTaskInfo> infos = am.getRunningTasks(100);
-					RunningTaskInfo info = infos.get(0);
-					ComponentName componentName = info.topActivity;
-					String packname = componentName.getPackageName();
+					List<RunningTaskInfo> infos = am.getRunningTasks(1);
+					String packname = infos.get(0).topActivity.getPackageName();
+					Log.i(TAG, packname);
 					if (dao.find(packname)) {
 						Log.i(TAG, "锁定：packname" + packname);
 						if (temUnlockAppPackgeNames.contains(packname)) {// 近其已经使用过，不用锁定了
@@ -94,7 +92,7 @@ public class AppLockService extends Service {
 					}
 
 					try {
-						Thread.sleep(50);
+						Thread.sleep(20);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

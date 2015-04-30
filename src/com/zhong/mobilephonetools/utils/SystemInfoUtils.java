@@ -11,6 +11,7 @@ import android.app.ActivityManager.MemoryInfo;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 
+
 public class SystemInfoUtils {
 
 	/**
@@ -70,6 +71,7 @@ public class SystemInfoUtils {
 					sb.append(c);
 				}
 			}
+			br.close();
 			return Long.parseLong(sb.toString())*1024;
 		} catch (Exception e) {
 			e.printStackTrace();

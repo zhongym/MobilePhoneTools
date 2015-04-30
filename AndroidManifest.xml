@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -34,6 +34,8 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE" />
+   <uses-permission android:name="android.permission.CLEAR_APP_CACHE" /> 
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
@@ -87,9 +89,12 @@
             android:name="com.zhong.mobilephonetools.UnlockGesturePasswordActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance" />
-        
         <activity android:name="com.zhong.mobilephonetools.AppLockSettingActivity" />
         <activity android:name="com.zhong.mobilephonetools.AppLockPwdSettingActivity" />
+        <activity android:name="com.zhong.mobilephonetools.PwdQuestionActivity" />
+        <activity android:name="com.zhong.mobilephonetools.TrafficManagerActivity" />
+        <activity android:name="com.zhong.mobilephonetools.AntiVirusActivity" />
+        <activity android:name="com.zhong.mobilephonetools.CacheCleanActivity" />
 
         <service android:name="com.zhong.mobilephonetools.service.GPSService" />
         <service android:name="com.zhong.mobilephonetools.service.NumberLocationService" />

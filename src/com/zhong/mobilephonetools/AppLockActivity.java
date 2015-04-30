@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,20 +15,15 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhong.mobilephonetools.business.AppInfoProvider;
-import com.zhong.mobilephonetools.business.TaskInfoProvider;
 import com.zhong.mobilephonetools.dao.AppLockDao;
 import com.zhong.mobilephonetools.domain.AppInfo;
-import com.zhong.mobilephonetools.domain.TaskInfo;
-import com.zhong.mobilephonetools.utils.SystemInfoUtils;
 
 /**
  * 进程管理activity
@@ -137,7 +129,7 @@ public class AppLockActivity extends Activity {
 		ll_load_app.setVisibility(View.VISIBLE);// 显示加载页面
 		new Thread() {
 			public void run() {
-				allAppInfos = AppInfoProvider.getAppInfos(getApplicationContext());
+				allAppInfos = AppInfoProvider.getAppInfosNoSize(getApplicationContext());
 				lockAppInfos = new ArrayList<AppInfo>();
 				unLockAppInfos = new ArrayList<AppInfo>();
 
@@ -238,13 +230,13 @@ public class AppLockActivity extends Activity {
 		TextView tv_appname;
 		ImageView iv_lock;
 	}
-	
+
 	/**
 	 * 进入软件锁的设置
 	 */
-	public void appLockSet(View view){
-		
-		Intent intent=new Intent(this, AppLockSettingActivity.class);
+	public void appLockSet(View view) {
+
+		Intent intent = new Intent(this, AppLockSettingActivity.class);
 		startActivity(intent);
 	}
 }

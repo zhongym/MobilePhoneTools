@@ -1,7 +1,5 @@
 package com.zhong.mobilephonetools;
 
-import com.zhong.mobilephonetools.utils.Md5Utils;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
@@ -13,6 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -22,6 +24,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zhong.mobilephonetools.utils.Md5Utils;
 
 /**
  * 软件的主界面
@@ -46,6 +50,9 @@ public class MainActivity extends BottomItemActivity {
 
 	private SharedPreferences sp;
 
+	/** 主界面旋转的图片 **/
+	private ImageView iv_rotate_main;
+
 	private String[] names = { "缓存清理", "手机防盗", "通讯卫士", "进程管理", "流量统计", "手机杀毒" };
 	/* "软件管理","高级工具","设置中心" */
 
@@ -59,7 +66,16 @@ public class MainActivity extends BottomItemActivity {
 		setContentView(R.layout.activity_main);
 		gv = (GridView) findViewById(R.id.gv_main_item);
 		sp = getSharedPreferences("config", MODE_PRIVATE);
-
+		
+		//设置图片动画
+		iv_rotate_main = (ImageView) findViewById(R.id.iv_rotate_main);
+		RotateAnimation rota = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+		rota.setDuration(1000);// 一次动画的持续时间
+		LinearInterpolator lin = new LinearInterpolator();//匀速
+		rota.setInterpolator(lin);//interpolator表示变化率，但不是运行速度
+		rota.setRepeatCount(Animation.INFINITE);// 重复模式：无限重复
+		iv_rotate_main.startAnimation(rota);
+		
 		gv.setAdapter(new MyAdpter());
 		// gv.setSelector(R.drawable.mian_item_layout_selector);
 
@@ -69,29 +85,33 @@ public class MainActivity extends BottomItemActivity {
 
 				switch (position) {
 				case 0:
-					Toast.makeText(MainActivity.this, "缓存清理", 0).show();
+//					Toast.makeText(MainActivity.this, "缓存清理", 0).show();
+					Intent cacheCleanActivity = new Intent(MainActivity.this, CacheCleanActivity.class);
+					startActivity(cacheCleanActivity);
 					break;
 
 				case 1:// 进入手机防盗页面
 					showLostFindDialog();
 					break;
 				case 2:
-//					Toast.makeText(MainActivity.this, "通讯卫士", 0).show();
-					Intent callSmsSafeActivity=new Intent(MainActivity.this,CallSmsSafeActivity.class);
+					// Toast.makeText(MainActivity.this, "通讯卫士", 0).show();
+					Intent callSmsSafeActivity = new Intent(MainActivity.this, CallSmsSafeActivity.class);
 					startActivity(callSmsSafeActivity);
 					break;
 				case 3:
-//					Toast.makeText(MainActivity.this, "进程管理", 0).show();
-					Intent taskManagerActivity=new Intent(MainActivity.this,TaskManagerActivity.class);
+					// Toast.makeText(MainActivity.this, "进程管理", 0).show();
+					Intent taskManagerActivity = new Intent(MainActivity.this, TaskManagerActivity.class);
 					startActivity(taskManagerActivity);
 					break;
 				case 4:
-
-					Toast.makeText(MainActivity.this, "流量统计", 0).show();
+					// Toast.makeText(MainActivity.this, "流量统计", 0).show();
+					Intent trafficMangager = new Intent(MainActivity.this, TrafficManagerActivity.class);
+					startActivity(trafficMangager);
 					break;
 				case 5:
-
-					Toast.makeText(MainActivity.this, "手机杀毒", 0).show();
+//					Toast.makeText(MainActivity.this, "手机杀毒", 0).show();
+					Intent antiVirusActivity = new Intent(MainActivity.this, AntiVirusActivity.class);
+					startActivity(antiVirusActivity);
 					break;
 				}
 			}

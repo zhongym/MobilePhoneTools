@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 /**
  * 主界面最下面的一排按键，将其抽取出来。然后要用到这排按键的activity只要继承这个类就有按键对应的点击事件了。
  * @author zhong

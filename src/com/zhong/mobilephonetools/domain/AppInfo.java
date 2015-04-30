@@ -77,6 +77,13 @@ public class AppInfo {
 		this.userApp = userApp;
 	}
 
+
+	@Override
+	public String toString() {
+		return "AppInfo [name=" + name + ", packageName=" + packageName + ", versionCode=" + versionCode + ", Size="
+				+ Size + ", inRom=" + inRom + ", userApp=" + userApp + "]";
+	}
+
 	
 
 }

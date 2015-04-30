@@ -1,21 +1,16 @@
 package com.zhong.mobilephonetools;
 
-import com.zhong.mobilephonetools.ui.SettingItemView;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zhong.mobilephonetools.ui.SettingItemView;
 
 /**
  * 手机防盗的设置向导的第一个activity

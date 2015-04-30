@@ -37,6 +37,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 	private ImageView gesturepwd_unlock_face;
 	private String packname;
 	private TextView gesturepwd_unlock_forget;
+
 	private void showToast(CharSequence message) {
 		if (null == mToast) {
 			mToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
@@ -61,9 +62,8 @@ public class UnlockGesturePasswordActivity extends Activity {
 		mHeadTextView = (TextView) findViewById(R.id.gesturepwd_unlock_text);
 		gesturepwd_unlock_face = (ImageView) findViewById(R.id.gesturepwd_unlock_face);
 		mShakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake_x);
-		gesturepwd_unlock_forget=(TextView) findViewById(R.id.gesturepwd_unlock_forget);
-		
-		
+		gesturepwd_unlock_forget = (TextView) findViewById(R.id.gesturepwd_unlock_forget);
+
 		packname = getIntent().getStringExtra("packname");
 		// 设置解锁显示图标
 		try {
@@ -75,14 +75,15 @@ public class UnlockGesturePasswordActivity extends Activity {
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-		//忘记密码
+
+		// 忘记密码,输入密保问题界面
 		gesturepwd_unlock_forget.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(UnlockGesturePasswordActivity.this, PwdQuestionActivity.class);
+				startActivity(intent);
 			}
 		});
-		
+
 	}
 
 	protected void onResume() {

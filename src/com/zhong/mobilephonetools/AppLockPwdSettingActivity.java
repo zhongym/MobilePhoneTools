@@ -52,9 +52,13 @@ public class AppLockPwdSettingActivity extends Activity {
 			}
 		});
 		
+		/**
+		 * 密保问题界面
+		 */
 		tv_pwd_question.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(AppLockPwdSettingActivity.this, PwdQuestionActivity.class);
+				startActivity(intent);
 			}
 		});
 

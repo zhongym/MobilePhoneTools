@@ -1,5 +1,7 @@
 package com.zhong.mobilephonetools;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +11,15 @@ import com.zhong.mobilephonetools.utils.DensityUtil;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageStats;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.RemoteException;
 import android.os.StatFs;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -80,6 +85,8 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 
 	/** 点击listView条目时的哪个应用 **/
 	private AppInfo appInfo;
+
+//	private long codesize;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -182,7 +189,8 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 		ll_load_app.setVisibility(View.VISIBLE);// 显示加载进度页面
 		new Thread() {// 加载所有应用程序要用好多时间的，放在子线程后台加载。先显示加载页面给用户看
 			public void run() {
-				appInfos = AppInfoProvider.getAppInfos(AppManagerActivity.this);
+				appInfos = new AppInfoProvider().getAppInfos(AppManagerActivity.this);
+				System.out.println(appInfos);
 				userAppInfos = new ArrayList<AppInfo>();
 				systemAppInfos = new ArrayList<AppInfo>();
 
@@ -280,18 +288,19 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 				viewHolder.iv_icon = (ImageView) view.findViewById(R.id.iv_appicon);
 				viewHolder.tv_name = (TextView) view.findViewById(R.id.tv_appname);
 				viewHolder.tv_verson = (TextView) view.findViewById(R.id.tv_versername);
+				viewHolder.tv_size = (TextView) view.findViewById(R.id.tv_size);
 				view.setTag(viewHolder);
 			}
 
 			viewHolder.iv_icon.setImageDrawable(info.getIcon());
 			viewHolder.tv_name.setText(info.getName());
-			
+
 			String version = info.getVersionCode();
-			if (version!=null&&version.length() > 21) {
+			if (version != null && version.length() > 21) {
 				version = version.substring(0, 20);
 			}
 			viewHolder.tv_verson.setText("版本：" + version);
-
+			viewHolder.tv_size.setText(Formatter.formatFileSize(getApplicationContext(), info.getSize()));
 			return view;
 		}
 	}
@@ -302,8 +311,10 @@ public class AppManagerActivity extends Activity implements OnClickListener {
 	static class ViewHolder {
 		TextView tv_name;
 		TextView tv_verson;
+		TextView tv_size;
 		ImageView iv_icon;
 	}
+
 
 	/**
 	 * 获得路径可用空间

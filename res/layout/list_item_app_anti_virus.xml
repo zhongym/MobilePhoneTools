@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/iv_appicon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/iv_appicon"
-        android:paddingLeft="15dp"
+        android:paddingLeft="10dp"
         android:text="应用名称"
         android:textColor="#aa000000"
         android:textSize="18sp" />
@@ -31,6 +31,12 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
         android:paddingLeft="20dp"
-        android:src="@drawable/lock" />
+        android:src="@drawable/status_good" />
+
+    <View
+        android:layout_below="@id/iv_appicon"
+        android:background="#11000000"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp" />
 
 </RelativeLayout>

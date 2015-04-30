@@ -7,45 +7,49 @@
         android:id="@+id/layout_top_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#6bce22"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <com.zhong.mobilephonetools.ui.FocusTextView
+            android:id="@+id/ftv_showinfo_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#6bce22" >
+            android:layout_marginTop="4dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="更新内容：1:修复了上一版本的小bug;2:添加用户要求添加的小功能;3:新增支付宝在线支付功能"
+            android:textSize="20sp" />
 
-            <com.zhong.mobilephonetools.ui.FocusTextView
-                android:id="@+id/ftv_showinfo_main"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:text="更新内容：1:修复了上一版本的小bug;2:添加用户要求添加的小功能;3:新增支付宝在线支付功能"
-                android:textSize="20sp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp" >
 
             <ImageView
-                android:id="@+id/iv3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="90dp"
-                android:src="@drawable/common_icon24" />
-        </RelativeLayout>
+                android:layout_width="185dp"
+                android:layout_height="185dp"
+                android:layout_gravity="center"
+                android:src="@drawable/privacy_smash_scan_bg" />
 
-        <GridView
-            android:id="@+id/gv_main_item"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#33000000"
-            android:gravity="center_horizontal"
-            android:horizontalSpacing="1dip"
-            android:numColumns="2"
-            android:verticalSpacing="1dip" >
-        </GridView>
+            <ImageView
+                android:id="@+id/iv_rotate_main"
+                android:layout_width="185dp"
+                android:layout_height="185dp"
+                android:layout_gravity="center"
+                android:src="@drawable/scanning_radar" />
+        </FrameLayout>
     </LinearLayout>
 
-    <include layout="@layout/bottom_item"/>
-    
+    <GridView
+        android:id="@+id/gv_main_item"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top_main"
+        android:background="#33000000"
+        android:gravity="center_horizontal"
+        android:horizontalSpacing="1dip"
+        android:numColumns="2"
+        android:verticalSpacing="1dip" >
+    </GridView>
 
+    <include layout="@layout/bottom_item" />
 </RelativeLayout>
